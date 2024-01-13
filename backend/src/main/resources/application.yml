@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:54329/student
+    username: student
+    password: student
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  application:
+    name: students

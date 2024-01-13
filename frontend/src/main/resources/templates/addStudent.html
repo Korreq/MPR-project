@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Student</title>
+        <link rel="stylesheet" th:href="@{/styles.css}"/>
+    </head>
+    <body>
+        <form method="POST" th:action="@{/students-page/add}" th:object="${student}">
+            <p>
+                <label>
+                    Name:
+                    <input th:field="*{name}"/>
+                </label>
+                <label>
+                    Surname:
+                    <input th:field="*{surname}">
+                </label>
+            </p>
+            <p>
+                <label>
+                    Unit:
+                    <select th:field="*{unit}">
+                        <option th:each="studentUnit: ${T(com.example.students.enums.StudentUnit).values()}"
+                                th:value="${studentUnit}" th:text="${studentUnit}">
+                        </option>
+                    </select>
+                </label>
+                <label>
+                    Gender:
+                    <select th:field="*{gender}">
+                        <option th:each="gender: ${T(com.example.students.enums.Gender).values()}"
+                                th:value="${gender}" th:text="${gender}">
+                        </option>
+                    </select>
+                </label>
+            </p>
+            <button type="submit">Add</button>
+            <a th:href="@{/students-page}"><button type="button">Cancel</button></a>
+        </form>
+        <hr>
+    </body>
+    <footer th:insert="footer"></footer>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Update Student's Semester</title>
+        <link rel="stylesheet" th:href="@{/styles.css}"/>
+    </head>
+    <body>
+        <form method="POST" th:action="@{/students-page/update}" th:object="${student}">
+            <label>
+                UUID:
+                <input th:field="*{id}"/>
+            </label>
+            <button type="submit">Update</button>
+            <a th:href="@{/students-page}"><button type="button">Cancel</button></a>
+        </form>
+        <hr>
+    </body>
+    <footer th:insert="footer"></footer>
+</html>

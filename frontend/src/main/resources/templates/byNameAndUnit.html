@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter by name and unit</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<form method="POST" th:action="@{/students-page/byNameAndUnit}" th:object="${data}">
+    <label>
+        Name:
+        <input th:field="*{name}"/>
+    </label>
+    <label>
+        Unit:
+        <select th:field="*{unit}">
+            <option th:each="studentUnit: ${T(com.example.students.enums.StudentUnit).values()}"
+                    th:value="${studentUnit}" th:text="${studentUnit}">
+            </option>
+        </select>
+    </label>
+    <button type="submit">Filter</button>
+    <a th:href="@{/students-page}"><button type="button">Back</button></a>
+</form>
+<hr>
+<table th:if="${filteredStudents}">
+    <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Gender</th>
+        <th>Unit</th>
+        <th>Semester</th>
+        <th>UUID</th>
+    </tr>
+    <tr th:each="student : ${filteredStudents}">
+        <td th:text="${student.index}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.surname}"></td>
+        <td th:text="${student.gender}"></td>
+        <td th:text="${student.unit}"></td>
+        <td th:text="${student.semester}"></td>
+        <td th:text="${student.id}"></td>
+    </tr>
+</table>
+</body>
+<footer th:insert="footer"></footer>
+</html>

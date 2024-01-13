@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Delete Student</title>
+      <link rel="stylesheet" th:href="@{/styles.css}"/>
+  </head>
+  <body>
+    <form method="POST" th:action="@{/students-page/delete}" th:object="${student}">
+        <label>
+            Name:
+            <input th:field="*{name}"/>
+        </label>
+        <button type="submit">Delete</button>
+        <a th:href="@{/students-page}"><button type="button">Cancel</button></a>
+    </form>
+    <hr>
+  </body>
+  <footer th:insert="footer"></footer>
+</html>
