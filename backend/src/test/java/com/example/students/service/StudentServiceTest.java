@@ -60,13 +60,13 @@ class StudentServiceTest {
 
         assertEquals(student.getName(), savedStudent.getName());
         assertEquals(student.getUnit(), savedStudent.getUnit());
-        assertEquals(50L, savedStudent.getIndex());
+        assertEquals(15L, savedStudent.getIndex());
         verify(studentRepository, times(1)).findMaxIndex();
         verify(studentRepository, times(1)).save(captor.capture());
         var studentArg = captor.getValue();
         assertEquals(student.getName(), studentArg.getName());
         assertEquals(student.getUnit(), studentArg.getUnit());
-        assertEquals(50L, studentArg.getIndex());
+        assertEquals(15L, studentArg.getIndex());
     }
 
 }

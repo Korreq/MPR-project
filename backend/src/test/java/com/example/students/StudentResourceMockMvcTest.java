@@ -79,7 +79,7 @@ class StudentResourceMockMvcTest {
     }
     @Test
     void givenNoStudentsWhenGetBySemesterThenReturnEmptyList() throws Exception {
-        mockMvc.perform(get("/students/semester?semester=1"))
+        mockMvc.perform(get("/students/bySemester?semester=1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("[]")));
@@ -98,7 +98,7 @@ class StudentResourceMockMvcTest {
                 .getResponse();
         var returnedStudents = objectMapper.readValue(response.getContentAsString(), new TypeReference<List<StudentDto>>() {});
 
-        assertEquals(returnedStudents.size(), 2);
+        assertEquals(returnedStudents.size(), 3);
         assertEquals(returnedStudents.get(0).getName(), "Karola");
         assertEquals(returnedStudents.get(0).getUnit(), StudentUnit.GDANSK);
     }
@@ -109,7 +109,7 @@ class StudentResourceMockMvcTest {
         var student3 = new Student("Jan", "Kowalski", StudentUnit.BYTOM, Gender.MALE, 17L);
         studentRepository.saveAll(List.of(student1, student2, student3));
 
-        var response = mockMvc.perform(get("/students/full?name=Karola&surname=Nam"))
+        var response = mockMvc.perform(get("/students/byFullName?name=Karola&surname=Nam"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn()
@@ -127,7 +127,7 @@ class StudentResourceMockMvcTest {
         var student3 = new Student("Jan", "Kowalski", StudentUnit.BYTOM, Gender.MALE, 17L);
         studentRepository.saveAll(List.of(student1, student2, student3));
 
-        var response = mockMvc.perform(get("/students/unit?name=Karola&unit=GDANSK"))
+        var response = mockMvc.perform(get("/students/byNameAndUnit?name=Karola&unit=GDANSK"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn()
@@ -160,7 +160,7 @@ class StudentResourceMockMvcTest {
         var student = new Student("Name", "Surname", 16);
         studentRepository.save(student);
         UUID id = studentRepository.findByName("Name").get(0).getId();
-        var response = mockMvc.perform(post("/students/" + id))
+        var response = mockMvc.perform(put("/students/" + id))
                 .andDo(print())
                 .andExpect(content().string(containsString("within bounds")))
                 .andReturn()
